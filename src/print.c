@@ -19,12 +19,29 @@
  * type 2 = float
  * type 3 = double
  *****************************/
-void print(const void *data, int size, int type)
+void print(const void *data, int size, int type, int index)
+{
+  if (size < 0)
+    printf("%s", (char *)data);
+  else
+    printArray(data, size, type, index);
+}
+
+void printArray(const void *data, int size, int type, int index)
 {
   printf("[");
   color(YELLOW);
+
+  if (index)
+    printf("\n");
+
   for (int i = 0; i < size; i++)
   {
+    if (index)
+      printf(" %d: ", i);
+    else
+      printf(" %d: ", i);
+
     if (i == size - 1)
     {
       if (type == 0)
@@ -47,6 +64,9 @@ void print(const void *data, int size, int type)
       else if (type == 3)
         printf("%lf, ", ((double *)data)[i]);
     }
+
+    if (index)
+      printf("\n");
   }
 
   color(DEFAULT);
